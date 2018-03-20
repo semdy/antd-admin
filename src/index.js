@@ -6,13 +6,15 @@ import createHistory from 'history/createHashHistory';
 // user BrowserHistory
 // import createHistory from 'history/createBrowserHistory';
 import createLoading from 'dva-loading';
+import FastClick from 'fastclick';
+
 import 'moment/locale/zh-cn';
 import './rollbar';
-
 import './index.less';
+
 // 1. Initialize
 const app = dva({
-  history: createHistory(),
+  history: createHistory()
 });
 
 // 2. Plugins
@@ -26,5 +28,8 @@ app.router(require('./router').default);
 
 // 5. Start
 app.start('#root');
+
+// 6. Fix click delay on mobile device
+FastClick.attach(document.body);
 
 export default app._store;  // eslint-disable-line
